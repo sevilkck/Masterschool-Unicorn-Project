@@ -104,7 +104,7 @@ LIMIT 1;
 --Question 8: Display customer names for customers who are in the segment ‘Consumer’ or ‘Corporate.’
 --How many customers are there in total?
 
-SELECT COUNT(DISTINCT customer_name) AS total_count_cust_name_in_consumer_and_corporate
+SELECT COUNT(DISTINCT customer_id) AS total_count_cust_in_consumer_and_corporate
 FROM customers
 WHERE customer_segment IN('Consumer','Corporate');
 
