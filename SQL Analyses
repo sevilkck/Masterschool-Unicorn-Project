@@ -6,13 +6,15 @@ postgresql://Test:bQNxVzJL4g6u@ep-noisy-flower-846766-pooler.us-east-2.aws.neon.
 
 SELECT COUNT (customer_id) AS total_num_customer 
 FROM customers;
+
 --This query counts the total number of entries in the customers table
+--As customer_id is unique, I didn`t write the query based on COUNT(DISTINCT customer_id)
 --SOLUTION (total_num_customer 795)
 
 
 --Question 2: What was the city with the most profit for the company in 2015?
 
-SELECT o.shipping_city, '$' || TO_CHAR(SUM(od.order_profits), '999,999,990') AS total_profit
+SELECT o.shipping_city, '$' || TO_CHAR(SUM(od.order_profits), '999,999,990.00') AS total_profit
 FROM orders o
 JOIN order_details od 
 USING (order_id)
@@ -28,7 +30,7 @@ LIMIT 1;
 
 --Question 3: In 2015, what was the most profitable city's profit?
 
-SELECT o.shipping_city, '$' || TO_CHAR(SUM(od.order_profits), '999,999,990') AS highest_profit
+SELECT o.shipping_city, '$' || TO_CHAR(SUM(od.order_profits), '999,999,990.00') AS highest_profit
 FROM orders o
 JOIN order_details od 
 USING (order_id)
@@ -57,7 +59,7 @@ FROM orders;
 
 --Question 5: What is the most profitable city in the State of Tennessee?
 
-SELECT o.shipping_city, '$' || TO_CHAR(SUM(od.order_profits), '999,999,990') AS total_profit
+SELECT o.shipping_city, '$' || TO_CHAR(SUM(od.order_profits), '999,999,990.00') AS total_profit
 FROM orders o
 JOIN order_details od 
 USING (order_id)
@@ -84,7 +86,7 @@ GROUP BY customer_segment;
 
 --Question 7: Which was the biggest order regarding sales in 2015?
 
-SELECT o.order_id,  '$' || TO_CHAR(SUM(od.order_sales), '999,999,990') AS total_sales 
+SELECT o.order_id,  '$' || TO_CHAR(SUM(od.order_sales), '999,999,990.00') AS total_sales 
 FROM order_details od
 JOIN orders o
 USING (order_id)
@@ -104,7 +106,7 @@ LIMIT 1;
 --Question 8: Display customer names for customers who are in the segment ‘Consumer’ or ‘Corporate.’
 --How many customers are there in total?
 
-SELECT COUNT(DISTINCT customer_id) AS total_count_cust_in_consumer_and_corporate
+SELECT COUNT(DISTINCT customer_id) AS total_customer
 FROM customers
 WHERE customer_segment IN('Consumer','Corporate');
 
